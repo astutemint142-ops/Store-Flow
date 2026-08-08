@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>StoreFlow — Project Documentation</title>
+<style>
+  @page { size: A4; margin: 20mm 16mm 20mm 16mm; }
+  * { box-sizing: border-box; }
+  body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    color: #1f2937;
+    font-size: 12.5px;
+    line-height: 1.55;
+    margin: 0;
+  }
+  .cover {
+    height: 257mm;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    page-break-after: always;
+    background: linear-gradient(160deg, #1F4D36 0%, #2F6F4E 55%, #3f8a63 100%);
+    color: #ffffff;
+    margin: -20mm -16mm;
+    padding: 20mm 16mm;
+  }
+  .cover .badge {
+    width: 90px; height: 90px; border-radius: 22px;
+    background: rgba(255,255,255,0.15);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 40px; font-weight: 800; margin-bottom: 28px;
+    border: 2px solid rgba(255,255,255,0.4);
+  }
+  .cover h1 { font-size: 42px; margin: 0 0 6px; letter-spacing: 0.5px; }
+  .cover h2 { font-size: 16px; font-weight: 400; opacity: 0.9; margin: 0 0 40px; }
+  .cover .meta { font-size: 12px; opacity: 0.85; margin-top: 60px; line-height: 1.8; }
+  .cover .meta strong { display: block; font-size: 13px; }
+
+  h1.section {
+    font-size: 22px;
+    color: #1F4D36;
+    border-bottom: 3px solid #2F6F4E;
+    padding-bottom: 8px;
+    margin-top: 0;
+    page-break-before: always;
+  }
+  h2 {
+    font-size: 16px;
+    color: #1F4D36;
+    margin-top: 26px;
+    margin-bottom: 8px;
+    border-left: 4px solid #2F6F4E;
+    padding-left: 8px;
+  }
+  h3 {
+    font-size: 13.5px;
+    color: #2F6F4E;
+    margin-top: 18px;
+    margin-bottom: 6px;
+  }
+  p { margin: 6px 0; }
+  ul, ol { margin: 6px 0; padding-left: 22px; }
+  li { margin: 3px 0; }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 10px 0 16px;
+    font-size: 11.5px;
+  }
+  th, td {
+    border: 1px solid #d8dee5;
+    padding: 6px 9px;
+    text-align: left;
+    vertical-align: top;
+  }
+  th { background: #E7F3EC; color: #1F4D36; font-weight: 700; }
+  tr:nth-child(even) td { background: #fafcfb; }
+  code {
+    background: #f1f5f3;
+    color: #1F4D36;
+    padding: 1px 5px;
+    border-radius: 4px;
+    font-family: 'Consolas', 'Courier New', monospace;
+    font-size: 11.5px;
+  }
+  pre {
+    background: #17251d;
+    color: #d7ffe9;
+    padding: 10px 14px;
+    border-radius: 8px;
+    overflow-x: auto;
+    font-size: 11px;
+    line-height: 1.5;
+    margin: 8px 0 14px;
+    page-break-inside: avoid;
+  }
+  pre code { background: none; color: inherit; padding: 0; }
+  .note {
+    background: #FBEAE8;
+    border-left: 4px solid #C0392B;
+    padding: 8px 12px;
+    border-radius: 4px;
+    margin: 10px 0;
+    font-size: 11.5px;
+  }
+  .tip {
+    background: #E7F3EC;
+    border-left: 4px solid #2F6F4E;
+    padding: 8px 12px;
+    border-radius: 4px;
+    margin: 10px 0;
+    font-size: 11.5px;
+  }
+  .status-done { color: #2F7A4D; font-weight: 700; }
+  .status-pending { color: #b8860b; font-weight: 700; }
+  .status-planned { color: #888; font-weight: 700; }
+  .toc { margin-top: 30px; }
+  .toc ol { list-style: none; padding-left: 0; counter-reset: toc; }
+  .toc li { counter-increment: toc; margin: 10px 0; font-size: 13px; }
+  .toc li::before { content: counter(toc) ". "; color: #2F6F4E; font-weight: 700; }
+  .small { font-size: 10.5px; color: #6b7280; }
+  .cmd-group { margin-bottom: 16px; }
+  footer.pagefoot { margin-top: 40px; font-size: 10px; color: #9aa5a0; text-align: center; }
+</style>
+</head>
+<body>
+
+<!-- ============ COVER PAGE ============ -->
+<div class="cover">
+  <div class="badge">SF</div>
+  <h1>StoreFlow</h1>
+  <h2>Superstore &amp; Grocery Store Management System — Complete Project Documentation</h2>
+  <div class="meta">
+    <strong>Web Application · Mobile Application · Backend API</strong>
+    Prepared as a complete reference: introduction, architecture, features,<br/>
+    setup steps, commands, hosting plan, and future roadmap.
+  </div>
+</div>
+
+<!-- ============ TABLE OF CONTENTS ============ -->
+<h1 class="section" style="page-break-before: avoid;">Table of Contents</h1>
+<div class="toc">
+  <ol>
+    <li>Introduction &amp; Project Purpose</li>
+    <li>Technology Stack</li>
+    <li>System Architecture</li>
+    <li>User Roles &amp; Permissions</li>
+    <li>Complete Feature List (Base → Intermediate → Advanced)</li>
+    <li>Local Development Setup (Step by Step)</li>
+    <li>Complete Command Reference</li>
+    <li>Building &amp; Distributing the Mobile App (EAS Build)</li>
+    <li>Hosting &amp; Deployment Plan</li>
+    <li>SMS &amp; WhatsApp Messaging Solution</li>
+    <li>Security Notes</li>
+    <li>Future Roadmap</li>
+    <li>Appendix — Full Terminal Command List</li>
+  </ol>
+</div>
+
+<!-- ============ 1. INTRODUCTION ============ -->
+<h1 class="section">1. Introduction &amp; Project Purpose</h1>
+
+<p><strong>StoreFlow</strong> is a management system built for superstores and grocery
+stores. It replaces manual, paper-based (or scattered spreadsheet) processes with a
+single connected system that covers inventory, order taking, worker coordination,
+payments, and reporting — usable from a computer (web app) or a phone (mobile app).</p>
+
+<p>The system is <strong>multi-tenant</strong>, meaning one deployment of StoreFlow can
+serve many separate businesses at the same time. Each business ("tenant") only ever
+sees its own data — its own items, orders, staff, and customers — even though
+everyone is using the same backend and database.</p>
+
+<h2>1.1 Who is it for?</h2>
+<ul>
+  <li><strong>Store Owners</strong> — who want to manage inventory, staff, and see sales
+  reports without hiring a developer for every change.</li>
+  <li><strong>Counter Staff</strong> — who take customer orders at the counter/till.</li>
+  <li><strong>Store Workers</strong> — who physically collect items from the shelves to
+  fulfill an order.</li>
+  <li><strong>Super Admin (platform owner)</strong> — the person who runs StoreFlow itself
+  as a service to multiple store businesses (i.e. the developer/business selling this
+  system to multiple clients).</li>
+</ul>
+
+<h2>1.2 The Three Parts of the Project</h2>
+<table>
+  <tr><th>Part</th><th>What it is</th><th>Who uses it</th></tr>
+  <tr><td><strong>Backend</strong></td><td>A Laravel (PHP) REST API — the "brain" of the system. Stores all data and enforces all business rules and permissions.</td><td>Not used directly by people — both the Web App and Mobile App talk to it.</td></tr>
+  <tr><td><strong>Frontend (Web App)</strong></td><td>A React single-page application used from a browser on a desktop/laptop.</td><td>Owners, Counter Staff, Store Workers, Super Admin.</td></tr>
+  <tr><td><strong>Mobile App</strong></td><td>A React Native (Expo) Android/iOS app with the same features as the web app.</td><td>Same roles, used on a phone/tablet.</td></tr>
+</table>
+
+<p class="tip">Both the Web App and the Mobile App are just two different "front doors"
+to the exact same Backend API — so a feature added to the backend is instantly available
+to both, and data stays perfectly in sync between web and mobile.</p>
+
+<!-- ============ 2. TECH STACK ============ -->
+<h1 class="section">2. Technology Stack</h1>
+
+<h2>2.1 Backend</h2>
+<table>
+  <tr><th>Technology</th><th>Version</th><th>Purpose</th></tr>
+  <tr><td>PHP</td><td>^8.3</td><td>Programming language the backend runs on</td></tr>
+  <tr><td>Laravel</td><td>^13.8</td><td>The web framework — routing, database, validation, etc.</td></tr>
+  <tr><td>SQLite</td><td>—</td><td>Database used during development (a single file, no server needed)</td></tr>
+  <tr><td>Laravel Sanctum</td><td>^4.0</td><td>Login/authentication using secure tokens (no cookies) — same tokens work for web and mobile</td></tr>
+  <tr><td>Laravel Reverb</td><td>^1.11</td><td>Real-time WebSocket server — instantly pushes new orders to a Store Worker's screen on the web app, no refresh needed</td></tr>
+  <tr><td>Maatwebsite/Excel</td><td>^3.1</td><td>Reads uploaded Excel/CSV files to bulk-import inventory items</td></tr>
+  <tr><td>Twilio SDK</td><td>^8.11</td><td>Sends real SMS text messages (used for due-payment reminders)</td></tr>
+</table>
+
+<h2>2.2 Frontend (Web App)</h2>
+<table>
+  <tr><th>Technology</th><th>Version</th><th>Purpose</th></tr>
+  <tr><td>React</td><td>^19.2</td><td>UI library — builds the interface out of reusable components</td></tr>
+  <tr><td>Vite</td><td>^8.1</td><td>Fast build tool / dev server for the React app</td></tr>
+  <tr><td>React Router</td><td>^7.18</td><td>Page navigation without full page reloads</td></tr>
+  <tr><td>Laravel Echo + Pusher-js</td><td>^2.4 / ^8.5</td><td>Connects the browser to Reverb's WebSocket server for real-time order updates</td></tr>
+  <tr><td>Recharts</td><td>^3.10</td><td>Draws the sales/report charts (line, bar, donut)</td></tr>
+  <tr><td>lucide-react</td><td>^1.25</td><td>Icon set used throughout the interface</td></tr>
+</table>
+
+<h2>2.3 Mobile App</h2>
+<table>
+  <tr><th>Technology</th><th>Version</th><th>Purpose</th></tr>
+  <tr><td>Expo (SDK)</td><td>~57.0</td><td>The framework/toolchain that runs and builds the React Native app</td></tr>
+  <tr><td>React Native</td><td>0.86</td><td>Lets the app be written once in JavaScript/React and run on Android and iOS</td></tr>
+  <tr><td>React Navigation (Drawer)</td><td>^7.13</td><td>The slide-out side menu navigation used per role</td></tr>
+  <tr><td>Expo Secure Store</td><td>~57.0</td><td>Safely stores the login token on the device</td></tr>
+  <tr><td>Expo Image Picker</td><td>~57.0</td><td>Lets a user choose a profile photo from their gallery</td></tr>
+  <tr><td>Expo Document Picker</td><td>~57.0</td><td>Lets the Owner choose an Excel/CSV file to import from the phone's storage</td></tr>
+  <tr><td>Expo Build Properties</td><td>~57.0</td><td>Lets Android connect to a local (non-HTTPS) backend during development/testing</td></tr>
+  <tr><td>EAS (Expo Application Services)</td><td>cloud service</td><td>Builds the installable APK / production app bundle in the cloud</td></tr>
+</table>
+
+<h2>2.4 Why these choices?</h2>
+<ul>
+  <li><strong>Laravel</strong> was chosen because it comes with authentication, database
+  handling (migrations), file uploads, and job scheduling already built in — much faster
+  to build a solid backend than writing everything from scratch.</li>
+  <li><strong>React + React Native</strong> together mean the same team/skillset (JavaScript)
+  builds both the web and mobile app, and a lot of logic (like how WhatsApp receipts are
+  built, or how search works) is written almost identically in both places.</li>
+  <li><strong>SQLite</strong> is only for local development — see Section 9 for the
+  production database plan (MySQL).</li>
+</ul>
+
+<!-- ============ 3. ARCHITECTURE ============ -->
+<h1 class="section">3. System Architecture</h1>
+
+<h2>3.1 High-Level Flow</h2>
+<pre>
+ ┌────────────────┐        ┌─────────────────┐
+ │   Web App       │        │   Mobile App     │
+ │  (React + Vite) │        │ (React Native +  │
+ │                  │        │      Expo)       │
+ └────────┬─────────┘        └────────┬─────────┘
+          │   HTTPS / REST API calls          │
+          │   (Bearer token in every request) │
+          └───────────────┬────────────────────┘
+                           ▼
+                ┌─────────────────────┐
+                │   Laravel Backend    │
+                │   (single REST API)  │
+                │  - Auth (Sanctum)    │
+                │  - Business rules    │
+                │  - Multi-tenant scope│
+                └──────────┬───────────┘
+                           ▼
+                ┌─────────────────────┐
+                │  Database (SQLite    │
+                │  in dev / MySQL in   │
+                │  production)         │
+                └─────────────────────┘
+</pre>
+
+<h2>3.2 Multi-Tenancy (Many Businesses, One System)</h2>
+<p>Every important table (items, categories, orders, customers, purchases, staff, etc.)
+has a hidden <code>tenant_id</code> column. Every database query is automatically
+filtered to the logged-in user's own <code>tenant_id</code> — this is enforced at the
+model level (a Laravel "Global Scope"), so it is not something a developer can
+accidentally forget to add to a new query. This means:</p>
+<ul>
+  <li>Business A can never see Business B's items, orders, or staff.</li>
+  <li>The <strong>Super Admin</strong> account is the only role that is not tied to one
+  tenant — it can see the list of all registered businesses and suspend/reactivate them,
+  but it cannot see any business's actual store data (items, orders, customers).</li>
+</ul>
+
+<h2>3.3 Real-Time Order Updates (Web) vs. Polling (Mobile)</h2>
+<p>When a Counter Staff member places a new order, the assigned Store Worker's pick-list
+screen needs to show it immediately.</p>
+<ul>
+  <li><strong>On the Web App:</strong> Laravel Reverb (a WebSocket server) pushes the new
+  order to the browser the instant it is created — no refresh or delay.</li>
+  <li><strong>On the Mobile App:</strong> instead of a WebSocket connection, the app checks
+  for new orders automatically every 6 seconds. This was a deliberate simplicity choice —
+  it works reliably on any network and needs no extra mobile-specific real-time setup.</li>
+</ul>
+
+<h2>3.4 Worker Auto-Assignment (Load Balancing)</h2>
+<p>When a new order is placed, the backend automatically decides which Store Worker
+should collect it:</p>
+<ol>
+  <li>Find all Store Workers who are currently <strong>free</strong> (no order currently
+  assigned to them that is still "placed" or "picking").</li>
+  <li>Among the free workers, pick the one who has been assigned the <strong>fewest orders
+  overall</strong> (fair rotation).</li>
+  <li>If <strong>no worker is free</strong>, the order is left unassigned ("queued") and is
+  invisible to all workers.</li>
+  <li>As soon as any worker finishes their current order (marks it "ready"), the system
+  automatically looks for the oldest queued order and assigns it to that now-free worker.</li>
+</ol>
+
+<!-- ============ 4. ROLES ============ -->
+<h1 class="section">4. User Roles &amp; Permissions</h1>
+<table>
+  <tr><th>Role</th><th>Can do</th></tr>
+  <tr>
+    <td><strong>Super Admin</strong></td>
+    <td>Views the list of all registered businesses (tenants). Can suspend or
+    reactivate a business's access. Can also <strong>permanently delete</strong> a business
+    (see Section 5.4) — removes all its data and staff accounts and frees up the owner's
+    email for reuse. Cannot see any business's items, orders, or staff.</td>
+  </tr>
+  <tr>
+    <td><strong>Owner</strong></td>
+    <td>Full control of their own business: Categories, Items (+ Excel import), New Order,
+    Payments, Low Stock Alerts, Purchases (restocking), Reports &amp; Analytics, Staff
+    management, Staff Activity report, Settings. Can also do everything Counter Staff and
+    Store Worker can do (oversight).</td>
+  </tr>
+  <tr>
+    <td><strong>Counter Staff</strong></td>
+    <td>Take new customer orders (search-and-add items), process Payments (cash/card/credit),
+    send WhatsApp receipts, manage their own account Settings.</td>
+  </tr>
+  <tr>
+    <td><strong>Store Worker</strong></td>
+    <td>Sees only the orders assigned to them; marks each item as collected off the shelf;
+    order becomes "Ready for payment" once all items are collected.</td>
+  </tr>
+</table>
+
+<!-- ============ 5. FEATURES ============ -->
+<h1 class="section">5. Complete Feature List</h1>
+<p>Features are grouped the way the project was scoped and built — <strong>Base</strong>
+(core day-to-day system), <strong>Intermediate</strong> (analytics/reporting layer), and
+<strong>Advanced</strong> (multi-business platform + messaging + mobile app).</p>
+
+<h2>5.1 Base Version</h2>
+<table>
+  <tr><th>Feature</th><th>Details</th></tr>
+  <tr><td>Authentication</td><td>Login, self-service business registration (email verification code), Forgot/Reset Password.</td></tr>
+  <tr><td>Categories &amp; Items</td><td>Full add/edit/delete for product categories and inventory items (price, purchase cost, stock quantity, low-stock threshold).</td></tr>
+  <tr><td>Excel/CSV Bulk Import</td><td>Owner uploads an Excel or CSV file with columns Category, Name, Price, Purchase Price, Stock Quantity, Low Stock Threshold — the system creates new items and updates existing ones automatically. A downloadable template is provided.</td></tr>
+  <tr><td>Order Taking (Search-based)</td><td>Instead of browsing categories one by one, staff type an item name <em>or</em> a category name (e.g. "juice") into a search box and matching items appear instantly below it.</td></tr>
+  <tr><td>Live Worker Pick-List</td><td>Store Worker sees their assigned order appear on screen in real time (web) or within 6 seconds (mobile), and taps items off as they are collected.</td></tr>
+  <tr><td>Automatic Worker Assignment</td><td>See Section 3.4 — orders are automatically routed to whichever worker is free, with automatic queuing and dispatch.</td></tr>
+  <tr><td>Payments</td><td>Cash, Card, or Credit (Due) payment types. Stock is automatically deducted when an order is placed.</td></tr>
+  <tr><td>WhatsApp Receipt</td><td>After payment, a "Send Receipt" button appears next to the customer's name — tapping it opens WhatsApp with the bill pre-filled, ready to send to the customer's number.</td></tr>
+  <tr><td>Purchases (Restocking)</td><td>Owner records new stock purchases from suppliers, which increases item stock quantities.</td></tr>
+  <tr><td>Low Stock Alerts</td><td>A dedicated page listing every item at or below its configured low-stock threshold.</td></tr>
+  <tr><td>Owner Dashboard</td><td>At-a-glance summary of the business (sales, order counts, etc.).</td></tr>
+  <tr><td>Staff Management</td><td>Owner creates/removes Counter Staff and Store Worker accounts for their own business.</td></tr>
+  <tr><td>Staff Activity Report</td><td>Shows how many orders each Counter Staff member has taken and each Store Worker has picked, plus total sales handled.</td></tr>
+  <tr><td>Settings</td><td>Profile photo upload, password change (with show/hide "eye" icon on both web and mobile), and on mobile — managing multiple saved server addresses.</td></tr>
+</table>
+
+<h2>5.2 Intermediate Version — Reports &amp; Analytics <span class="status-done">(Done)</span></h2>
+<table>
+  <tr><th>Feature</th><th>Details</th></tr>
+  <tr><td>Sales Trend Chart</td><td>Line chart of sales over time.</td></tr>
+  <tr><td>Top Items Chart</td><td>Bar chart of best-selling items.</td></tr>
+  <tr><td>Payment Type Breakdown</td><td>Donut chart of Cash vs. Card vs. Credit split.</td></tr>
+  <tr><td>CSV Export</td><td>Reports can be exported/downloaded as CSV files.</td></tr>
+</table>
+
+<h2>5.3 Advanced Version</h2>
+<table>
+  <tr><th>Feature</th><th>Status</th><th>Details</th></tr>
+  <tr>
+    <td>Multi-Tenancy</td>
+    <td><span class="status-done">Done</span></td>
+    <td>Many businesses on one system, each fully isolated. Super Admin panel to oversee
+    all registered businesses.</td>
+  </tr>
+  <tr>
+    <td>Mobile App (React Native + Expo)</td>
+    <td><span class="status-done">Done</span></td>
+    <td>Full feature parity with the web app for all four roles, installable as an Android
+    APK.</td>
+  </tr>
+  <tr>
+    <td>Real SMS Due-Payment Reminders</td>
+    <td><span class="status-pending">Code complete — pending Twilio account setup</span></td>
+    <td>A scheduled command checks for overdue "credit" payments and sends a real SMS to
+    the customer via Twilio. All the code is written and tested — it only needs a real
+    Twilio account (SID, Auth Token, phone number) added to the server's <code>.env</code>
+    file to start actually sending messages. See Section 10.</td>
+  </tr>
+</table>
+
+<h2>5.4 Recent Additions — Order Workflow &amp; Admin Tools <span class="status-done">(Done)</span></h2>
+<p>Added after the base system was already live and in daily use, based on real usage
+feedback. All items below exist identically on both Web and Mobile unless noted otherwise.</p>
+<table>
+  <tr><th>Feature</th><th>Details</th></tr>
+  <tr>
+    <td>Dashboard Drill-Downs &amp; Search</td>
+    <td>The "Today's Sales", "Today's Orders", and "Pending Dues" cards on the Owner
+    dashboard are now real links — tapping one opens a dedicated, searchable page (filter
+    by date range and by customer name/phone/order number). The dashboard itself now only
+    shows the 2–3 most recent entries per section (instead of an ever-growing list), with a
+    "View all" link to the full searchable page.</td>
+  </tr>
+  <tr>
+    <td>Order Attribution — Who Booked / Who Picked</td>
+    <td>The Owner's "Order History" page shows a <strong>Booked By</strong> column (which
+    Counter Staff took each order) and can filter by a specific staff member. Counter Staff
+    have their own "My Orders" page showing only orders they personally booked. Store
+    Workers have their own "My Orders" page showing every order ever assigned to them, with
+    a Total Picked / Completed Today summary.</td>
+  </tr>
+  <tr>
+    <td>Priority ("Urgent") Orders</td>
+    <td>An "Urgent" checkbox is available when placing an order (e.g. a walk-in customer
+    who needs their order picked immediately). When a Store Worker becomes free, an urgent
+    order is handed to them ahead of the rest of the waiting queue — but an urgent order
+    never interrupts a worker who is already actively picking a different order.</td>
+  </tr>
+  <tr>
+    <td>Recheck / Confirm Ready</td>
+    <td>Previously, an order flipped to "Ready" automatically the instant the last item was
+    ticked off — risking a rushed mix-up between two customers' orders. Now, once every item
+    is ticked, the worker sees a final review list and must explicitly tap
+    <strong>"Review &amp; Confirm Ready"</strong> before the order moves to payment.</td>
+  </tr>
+  <tr>
+    <td>Editing an In-Progress Order</td>
+    <td>Owner/Counter Staff can now edit an order's items (add, remove, or change quantity)
+    any time before it is marked Ready — e.g. the customer changes their mind mid-pick. The
+    assigned worker's screen reflects the edit live (instantly on Web, within about 6 seconds
+    on Mobile) without needing a refresh.</td>
+  </tr>
+  <tr>
+    <td>Mobile Keyboard Fix</td>
+    <td>Input fields on the Settings, New Order, and Payments screens no longer get hidden
+    behind the on-screen keyboard while typing.</td>
+  </tr>
+  <tr>
+    <td>Collapsible Sidebar &amp; Independent Scrolling (Web)</td>
+    <td>The web sidebar can be collapsed to icons-only via a toggle button (the choice is
+    remembered between visits). The sidebar and the main content area now also scroll
+    independently of each other, so a long page of content no longer drags the sidebar out
+    of view.</td>
+  </tr>
+  <tr>
+    <td>Permanent Business Deletion (Super Admin)</td>
+    <td>Beyond Suspend/Reactivate, the Super Admin can now <strong>permanently delete</strong>
+    a business — mainly meant for cleaning up test accounts created during development. This
+    removes every item, category, order, customer, purchase, and due reminder belonging to
+    that business, along with all of its staff accounts, which frees up the owner's email to
+    be used again in a fresh registration. This action is irreversible, so it requires typing
+    the exact business name to confirm before it proceeds.</td>
+  </tr>
+</table>
+
+<!-- ============ 6. SETUP ============ -->
+<h1 class="section">6. Local Development Setup (Step by Step)</h1>
+
+<h2>6.1 Requirements</h2>
+<ul>
+  <li>PHP 8.3+ with Composer installed</li>
+  <li>Node.js (v18+) with npm</li>
+  <li>Expo Go app (for quick testing) or Android Studio (for a full emulator) — optional if only testing on a real phone</li>
+  <li>A code editor (VS Code)</li>
+</ul>
+
+<h2>6.2 Backend Setup</h2>
+<pre><code>cd Backend
+composer install
+copy .env.example .env          (Windows)   /   cp .env.example .env   (Mac/Linux)
+php artisan key:generate
+php artisan migrate
+php artisan serve</code></pre>
+<p>This starts the API at <code>http://127.0.0.1:8000</code>. For real-time order updates,
+also run Reverb in a second terminal:</p>
+<pre><code>php artisan reverb:start</code></pre>
+
+<h2>6.3 Frontend (Web App) Setup</h2>
+<pre><code>cd Frontend
+npm install
+npm run dev</code></pre>
+<p>This opens the web app at <code>http://localhost:5173</code> (Vite's default port).
+Make sure the Backend server (Section 6.2) is running at the same time.</p>
+
+<h2>6.4 Mobile App Setup</h2>
+<pre><code>cd Mobile
+npm install
+npx expo start</code></pre>
+<p>Then scan the QR code shown in the terminal using the <strong>Expo Go</strong> app on
+your phone (for quick testing), or press <code>a</code> to open an Android emulator.</p>
+<div class="note">
+  <strong>Important:</strong> the phone and the computer running the Backend must be on
+  the same Wi-Fi network. Inside the Mobile App's <strong>Settings → API Address</strong>
+  screen, enter the computer's local network IP address (e.g. <code>http://192.168.1.5:8000</code>)
+  instead of <code>localhost</code> — a phone cannot reach "localhost" on the computer.
+</div>
+
+<!-- ============ 7. COMMAND REFERENCE ============ -->
+<h1 class="section">7. Complete Command Reference</h1>
+<p>This section explains <em>what</em> each command does. Section 13 (Appendix) lists every
+command by itself with no explanation, for quick copy-paste reference.</p>
+
+<h2>7.1 Backend (run inside the <code>Backend</code> folder)</h2>
+<table>
+  <tr><th>Command</th><th>What it does</th></tr>
+  <tr><td><code>composer install</code></td><td>Downloads all PHP packages the backend needs</td></tr>
+  <tr><td><code>php artisan key:generate</code></td><td>Generates the app's secret encryption key (run once)</td></tr>
+  <tr><td><code>php artisan migrate</code></td><td>Creates/updates all database tables based on the migration files</td></tr>
+  <tr><td><code>php artisan migrate:fresh</code></td><td>Drops all tables and re-creates them from scratch (wipes all data — dev only)</td></tr>
+  <tr><td><code>php artisan migrate:fresh --seed</code></td><td>Same as above, then fills in demo/test data (seeded accounts)</td></tr>
+  <tr><td><code>php artisan serve</code></td><td>Starts the API server (default: <code>http://127.0.0.1:8000</code>)</td></tr>
+  <tr><td><code>php artisan reverb:start</code></td><td>Starts the real-time WebSocket server used for live order updates</td></tr>
+  <tr><td><code>php artisan queue:listen</code></td><td>Processes background jobs (e.g. sending SMS) — needed if any feature is queued</td></tr>
+  <tr><td><code>php artisan reminders:send-due</code></td><td>Manually runs the due-payment SMS reminder check (normally scheduled to run automatically once a day)</td></tr>
+  <tr><td><code>php artisan tinker</code></td><td>Opens an interactive PHP console connected to the app — used for quick manual data checks/fixes during development</td></tr>
+  <tr><td><code>composer require &lt;package&gt;</code></td><td>Adds a new PHP package to the project (e.g. <code>maatwebsite/excel</code>)</td></tr>
+</table>
+
+<h2>7.2 Frontend / Web App (run inside the <code>Frontend</code> folder)</h2>
+<table>
+  <tr><th>Command</th><th>What it does</th></tr>
+  <tr><td><code>npm install</code></td><td>Downloads all JavaScript packages the web app needs</td></tr>
+  <tr><td><code>npm run dev</code></td><td>Starts the local development server with live-reload</td></tr>
+  <tr><td><code>npm run build</code></td><td>Builds the optimized, production-ready static files (into a <code>dist</code> folder) — this is what gets uploaded to a hosting server</td></tr>
+  <tr><td><code>npm run preview</code></td><td>Serves the production build locally, to double check it before deploying</td></tr>
+  <tr><td><code>npm run lint</code></td><td>Checks the code for style/quality issues</td></tr>
+</table>
+
+<h2>7.3 Mobile App (run inside the <code>Mobile</code> folder)</h2>
+<table>
+  <tr><th>Command</th><th>What it does</th></tr>
+  <tr><td><code>npm install</code></td><td>Downloads all JavaScript packages the mobile app needs</td></tr>
+  <tr><td><code>npx expo start</code></td><td>Starts the Expo development server — shows a QR code to open the app in Expo Go</td></tr>
+  <tr><td><code>npx expo start --android</code></td><td>Same, but tries to open directly in a connected Android emulator/device</td></tr>
+  <tr><td><code>npx expo install &lt;package&gt;</code></td><td>Installs a new package, automatically choosing the version that matches this Expo SDK (safer than plain <code>npm install</code> for Expo packages)</td></tr>
+  <tr><td><code>npx eas login</code></td><td>Logs into your Expo/EAS account from the terminal (needed before building)</td></tr>
+  <tr><td><code>eas build --profile preview --platform android</code></td><td>Builds a real, installable Android APK file in the cloud (see Section 8)</td></tr>
+  <tr><td><code>eas build --profile production --platform android</code></td><td>Builds the final release version meant for the Google Play Store</td></tr>
+  <tr><td><code>eas build --profile production --platform ios</code></td><td>Builds the final release version meant for the Apple App Store</td></tr>
+  <tr><td><code>eas submit</code></td><td>Uploads a finished build directly to the Google Play / Apple App Store</td></tr>
+</table>
+
+<!-- ============ 8. EAS BUILD ============ -->
+<h1 class="section">8. Building &amp; Distributing the Mobile App (EAS Build)</h1>
+
+<p>Because a phone app cannot simply be "opened in a browser" the way a website can, it
+must be <strong>built</strong> into an installable file. StoreFlow uses <strong>EAS
+(Expo Application Services)</strong> — Expo's own cloud build service — so no local
+Android Studio / Xcode installation is required to produce a real app file.</p>
+
+<h2>8.1 The Three Build Profiles (in <code>eas.json</code>)</h2>
+<table>
+  <tr><th>Profile</th><th>Purpose</th><th>Output</th></tr>
+  <tr><td><code>development</code></td><td>A build with extra developer tools attached, for active coding/debugging</td><td>Development client app</td></tr>
+  <tr><td><code>preview</code></td><td>A real, shareable test build to install directly on a phone (no app store needed)</td><td><strong>.apk</strong> file — directly installable</td></tr>
+  <tr><td><code>production</code></td><td>The final version meant to be published to the Play Store / App Store</td><td>.aab (Android App Bundle) — Play Store format</td></tr>
+</table>
+
+<div class="tip">
+  <strong>Why "preview" builds an APK and "production" builds an AAB:</strong> An AAB
+  cannot be installed directly on a phone — it can only be uploaded to the Play Store,
+  which then generates the actual installable file per device. An APK, on the other hand,
+  can be shared and installed directly (perfect for testing with the client before an
+  official store release).
+</div>
+
+<h2>8.2 Typical Build &amp; Test Cycle</h2>
+<pre><code>cd Mobile
+npx eas login
+eas build --profile preview --platform android</code></pre>
+<p>Wait for the build to finish in the cloud (a link is printed in the terminal, and it's
+also visible on expo.dev). Download the <code>.apk</code> file to the phone and install it.</p>
+
+<div class="note">
+  <strong>App icon / name changes require a new build.</strong> Editing <code>app.json</code>
+  or replacing an icon image has <em>no effect</em> on an already-installed app — a new
+  <code>eas build</code> must be run, and the old app must be fully <strong>uninstalled</strong>
+  (not just overwritten) before installing the new one, since some Android launchers cache
+  the old icon/name otherwise.
+</div>
+
+<h2>8.3 Key <code>app.json</code> Settings</h2>
+<table>
+  <tr><th>Field</th><th>Purpose</th></tr>
+  <tr><td><code>name</code></td><td>The app name shown under the icon and during install</td></tr>
+  <tr><td><code>slug</code></td><td>A URL-safe internal identifier for the Expo project</td></tr>
+  <tr><td><code>icon</code></td><td>The app icon shown on iOS and older Android — must be a square PNG (1024×1024 recommended)</td></tr>
+  <tr><td><code>android.package</code></td><td>The unique Android package ID (e.g. <code>com.astutemint.storeflow</code>) — cannot be changed once published to the Play Store</td></tr>
+  <tr><td><code>android.adaptiveIcon</code></td><td>The modern Android icon system (foreground image + background color/image) — takes priority over the plain <code>icon</code> field on Android 8+</td></tr>
+</table>
+
+<!-- ============ 9. HOSTING ============ -->
+<h1 class="section">9. Hosting &amp; Deployment Plan</h1>
+<p class="small">Not yet implemented — documented here as the agreed plan for when the
+project is ready to go live.</p>
+
+<h2>9.1 Backend (Laravel API) Hosting</h2>
+<table>
+  <tr><th>Option</th><th>Notes</th></tr>
+  <tr><td><strong>VPS</strong> (e.g. DigitalOcean, Hostinger VPS, Contabo)</td><td>Full control server. Needs manual setup of PHP, Composer, Nginx/Apache, and a process manager. Best long-term option, most flexible.</td></tr>
+  <tr><td><strong>Managed Laravel hosting</strong> (e.g. Laravel Forge + any VPS provider)</td><td>Forge handles server setup, SSL, deployments automatically — recommended if avoiding manual server administration.</td></tr>
+  <tr><td><strong>Shared hosting with PHP/Composer support</strong></td><td>Cheapest option, but many shared hosts don't allow the background processes StoreFlow needs (queue worker, Reverb) — needs to be checked with the host first.</td></tr>
+</table>
+
+<h2>9.2 Database — Move from SQLite to MySQL</h2>
+<p>SQLite (a single file) is fine for development but is not recommended for a live,
+multi-tenant production system. The plan is to switch <code>DB_CONNECTION</code> in
+<code>.env</code> to <code>mysql</code> and provide real database host/username/password —
+Laravel's migrations run unchanged on MySQL, no application code changes needed.</p>
+
+<h2>9.3 Frontend (Web App) Hosting</h2>
+<ul>
+  <li>Run <code>npm run build</code> to produce a static <code>dist</code> folder.</li>
+  <li>Host it either on the same server as the backend (served by Nginx/Apache as static
+  files) or on a static-hosting service like Vercel or Netlify (free tier available,
+  simplest option, automatic SSL/CDN).</li>
+  <li>The web app just needs one setting: the backend API's live URL.</li>
+</ul>
+
+<h2>9.4 Real-Time (Reverb) in Production</h2>
+<p>Laravel Reverb needs a long-running process (not just a normal web request) to keep
+WebSocket connections open. On a VPS this is managed with a process supervisor
+(e.g. Supervisor) running <code>php artisan reverb:start</code> permanently in the
+background. As a simpler alternative, a hosted WebSocket service (e.g. Pusher's cloud
+service, which Laravel already supports through the same Echo/Pusher-js libraries used
+in the frontend) can be used instead of self-hosting Reverb.</p>
+
+<h2>9.5 Domain &amp; SSL</h2>
+<ul>
+  <li>A domain name is pointed at the server (e.g. <code>api.storeflow.com</code> for the
+  backend, <code>app.storeflow.com</code> for the web app).</li>
+  <li>Free SSL certificates (Let's Encrypt) are used so everything runs on <code>https://</code>
+  — required for the mobile app to connect reliably and for browsers to not show a
+  security warning.</li>
+</ul>
+
+<h2>9.6 Mobile App Store Publishing</h2>
+<table>
+  <tr><th>Store</th><th>Notes</th></tr>
+  <tr><td>Google Play Store</td><td>One-time $25 developer account fee. Can start with "Internal Testing" (instant, small group) before a full public release.</td></tr>
+  <tr><td>Apple App Store</td><td>$99/year developer account fee. Requires an Apple Developer account and review process (typically 1–3 days).</td></tr>
+</table>
+
+<!-- ============ 10. SMS/WHATSAPP ============ -->
+<h1 class="section">10. SMS &amp; WhatsApp Messaging Solution</h1>
+
+<h2>10.1 WhatsApp Receipts — <span class="status-done">Live Now</span></h2>
+<p>After a payment is processed, a green "Send Receipt" WhatsApp button appears next to
+the customer's name (on both web and mobile). Tapping it opens WhatsApp with the
+customer's number and a pre-written receipt message already filled in — the staff member
+just presses send.</p>
+<div class="note">
+  <strong>Important limitation:</strong> this uses WhatsApp's free "click-to-chat" link
+  (<code>wa.me</code>) — there is no way to check in advance whether a phone number is
+  actually registered on WhatsApp. If it isn't, WhatsApp itself will show an error when
+  the message is opened. There is no cost for this method, but it requires WhatsApp to be
+  installed on the device sending the message, and a person still has to press "Send".
+</div>
+
+<h2>10.2 SMS Due-Payment Reminders — <span class="status-pending">Code Complete, Needs Twilio Account</span></h2>
+<p>For customers who bought on credit ("due" payment) and haven't paid yet, StoreFlow can
+automatically send a real SMS reminder. This is fully coded and tested using Twilio, a
+paid SMS-sending service — it only needs a live Twilio account to actually start sending
+messages.</p>
+<h3>What is needed to go live:</h3>
+<ol>
+  <li>Create an account at <a href="#">twilio.com</a> and add billing (SMS costs a small
+  fee per message, varies by country).</li>
+  <li>Get a Twilio phone number that can send SMS to the target country.</li>
+  <li>Copy three values from the Twilio dashboard: <strong>Account SID</strong>,
+  <strong>Auth Token</strong>, and the <strong>Twilio phone number</strong>.</li>
+  <li>Add them to the Backend's <code>.env</code> file:
+    <pre><code>TWILIO_SID=your-account-sid
+TWILIO_AUTH_TOKEN=your-auth-token
+TWILIO_FROM_NUMBER=+1xxxxxxxxxx
+TWILIO_DEFAULT_COUNTRY_CODE=+92</code></pre>
+  </li>
+  <li>Run <code>php artisan reminders:send-due</code> once manually to confirm a real SMS
+  arrives, then it runs automatically once a day on its own schedule going forward.</li>
+</ol>
+
+<h2>10.3 Future Option — Official WhatsApp Business API</h2>
+<p>If more reliable, fully-automated WhatsApp sending is wanted later (instead of the
+manual click-to-send method above), the official <strong>WhatsApp Business Platform
+(Meta Cloud API)</strong> is the upgrade path. It requires a Meta Business verification
+process and has its own per-message cost, but allows messages to be sent completely
+automatically, without a staff member needing to press "Send" in the WhatsApp app. This
+is <strong>not yet built</strong> — noted here purely as a possible future upgrade.</p>
+
+<!-- ============ 11. SECURITY ============ -->
+<h1 class="section">11. Security Notes</h1>
+<ul>
+  <li>Passwords are never stored in plain text — Laravel hashes them automatically.</li>
+  <li>Login uses secure Bearer tokens (Sanctum) rather than storing a password on the
+  device — a token can be revoked (logout) without changing the password.</li>
+  <li>Every business's data is isolated at the database-query level (Section 3.2) — this
+  is enforced centrally, not something that can be forgotten in one particular screen.</li>
+  <li>Sensitive keys (Twilio credentials, Reverb secret, database password) live only in
+  the server's <code>.env</code> file, which is never committed to source control.</li>
+  <li>Before going live: change all demo/seeded passwords, generate a fresh
+  <code>APP_KEY</code> for production, and set <code>APP_DEBUG=false</code> so detailed
+  error messages are never shown to real users.</li>
+  <li>The Super Admin's "permanently delete a business" action (Section 5.4) is irreversible
+  and cannot be undone — it requires typing the exact business name to confirm, specifically
+  to prevent an accidental click from wiping a real client's data.</li>
+</ul>
+
+<!-- ============ 12. ROADMAP ============ -->
+<h1 class="section">12. Future Roadmap</h1>
+<table>
+  <tr><th>Item</th><th>Status</th></tr>
+  <tr><td>Add real Twilio credentials and confirm SMS reminders send successfully</td><td><span class="status-pending">Pending client action</span></td></tr>
+  <tr><td>Move production database from SQLite to MySQL</td><td><span class="status-planned">Planned</span></td></tr>
+  <tr><td>Deploy Backend + Web App to a live server with a domain and SSL</td><td><span class="status-planned">Planned</span></td></tr>
+  <tr><td>Publish Mobile App to Google Play Store (and Apple App Store if needed)</td><td><span class="status-planned">Planned</span></td></tr>
+  <tr><td>(Optional, later) Upgrade WhatsApp receipts to the official WhatsApp Business API for full automation</td><td><span class="status-planned">Future consideration</span></td></tr>
+</table>
+
+<!-- ============ 13. APPENDIX ============ -->
+<h1 class="section">13. Appendix — Full Terminal Command List</h1>
+<p>Every command used in this project, grouped by folder, with no explanation — for
+quick copy-paste reference while revising.</p>
+
+<div class="cmd-group">
+<h3>Backend/ folder</h3>
+<pre><code>composer install
+composer require maatwebsite/excel
+composer require twilio/sdk
+copy .env.example .env
+php artisan key:generate
+php artisan migrate
+php artisan migrate:fresh
+php artisan migrate:fresh --seed
+php artisan serve
+php artisan reverb:start
+php artisan queue:listen --tries=1 --timeout=0
+php artisan reminders:send-due
+php artisan tinker
+php artisan route:list
+php artisan config:clear
+php artisan cache:clear</code></pre>
+</div>
+
+<div class="cmd-group">
+<h3>Frontend/ folder</h3>
+<pre><code>npm install
+npm run dev
+npm run build
+npm run preview
+npm run lint</code></pre>
+</div>
+
+<div class="cmd-group">
+<h3>Mobile/ folder</h3>
+<pre><code>npm install
+npx expo install expo-document-picker
+npx expo install &lt;any-other-expo-package&gt;
+npx expo start
+npx expo start --android
+npx expo start --ios
+npx expo start --web
+npx eas login
+npx eas whoami
+eas build --profile development --platform android
+eas build --profile preview --platform android
+eas build --profile production --platform android
+eas build --profile production --platform ios
+eas submit --platform android
+eas submit --platform ios</code></pre>
+</div>
+
+<div class="cmd-group">
+<h3>Finding your computer's local network IP (for Mobile App → Backend connection)</h3>
+<pre><code># Windows (PowerShell / cmd)
+ipconfig
+
+# Mac / Linux
+ifconfig
+# or
+hostname -I</code></pre>
+<p class="small">Look for the "IPv4 Address" under your active Wi-Fi adapter — this is
+what gets typed into the Mobile App's Settings → API Address screen, e.g.
+<code>http://192.168.1.5:8000</code>.</p>
+</div>
+
+<footer class="pagefoot">StoreFlow — Project Documentation · Generated for internal, supervisor, and client reference</footer>
+
+</body>
+</html>
